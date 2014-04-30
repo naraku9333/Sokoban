@@ -9,16 +9,18 @@ namespace sv
 	{
 		enum class tile_type
 		{
-			wall = '#', box = '$', player = '@', free = '.', used = '*', blank = ' '
+			wall = '#', box = '$', player = '@', goal = '.', used = '*', free = ' '
 		};
 
 		class Tile : public sf::Sprite
 		{
 		public:
 			tile_type type;
-			Tile(sf::Texture& t, int x, int y) : Sprite(t)
+            sf::Vector2f pos;
+            Tile(const sf::Texture& t, int x, int y, char c) : Sprite(t), pos{ x, y }
 			{
-				setPosition(x * 32, y * 32);
+                type = static_cast<tile_type>(c);
+				setPosition(x * 32.f, y * 32.f);
 			}
 		};
 	}
